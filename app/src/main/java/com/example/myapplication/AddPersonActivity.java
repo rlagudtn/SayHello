@@ -100,4 +100,11 @@ public class AddPersonActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(AddPersonActivity.this,MainActivity.class);
+
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }
