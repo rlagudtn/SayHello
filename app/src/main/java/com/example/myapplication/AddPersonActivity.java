@@ -99,7 +99,7 @@ public class AddPersonActivity extends AppCompatActivity {
                         edtPhoneNum.getText().toString(),tvGroup.getText().toString(),
                         date );
                 Intent intent=new Intent(AddPersonActivity.this,MainActivity.class);
-                intent.putExtra("개인",person);
+                intent.putExtra("person",person);
                 startActivity(intent);
                 finish();
 

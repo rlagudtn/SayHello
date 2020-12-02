@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvPersonNum;
     ImageButton imgbtn_add, imgbtn_more;
     ListView lv_people;
+    Button btnGroup;
 
-
-    Button btn_group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +73,26 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         //peopleList.addPerson(new Person("홍길동1", "010"));
-        Person person = (Person) intent.getSerializableExtra("개인");
+        Person person = (Person) intent.getSerializableExtra("person");
         //Toast.makeText(this, person.name.toString(),Toast.LENGTH_SHORT).show();
         //추가되는 개인을 저장한다.
         if (person != null) {
             this.peopleList.addPerson(person);
-
+            try {
+                FileOutputStream outFs = openFileOutput("file.txt", Context.MODE_PRIVATE);
+                BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(outFs));
+                for(int i=0;i<this.peopleList.getSize();i++){
+                    Person newPerson=this.peopleList.getPerson(i);
+                    bufferedWriter.write(newPerson.name);
+                    bufferedWriter.newLine();
+                }
+                bufferedWriter.close();
+//
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 //
         }
 
@@ -88,6 +101,16 @@ public class MainActivity extends AppCompatActivity {
 //
 //        }
 
+        btnGroup=findViewById(R.id.btnGroup);
+        btnGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GroupActivity.class);
+
+                startActivity(intent);
+                finish();
+            }
+        });
         lv_people = (ListView) findViewById(R.id.lv_people);
         PeopleListAdapter peopleListAdapter = new PeopleListAdapter(this.peopleList, getApplicationContext());
         lv_people.setAdapter(peopleListAdapter);
@@ -114,21 +137,21 @@ public class MainActivity extends AppCompatActivity {
 
         if (gapTime >= 0 && gapTime <= 2000) {
 
-            try {
-                FileOutputStream outFs = openFileOutput("file.txt", Context.MODE_PRIVATE);
-                BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(outFs));
-                for(int i=0;i<this.peopleList.getSize();i++){
-                    Person person=this.peopleList.getPerson(i);
-                   bufferedWriter.write(person.name);
-                   bufferedWriter.newLine();
-                }
-                bufferedWriter.close();
-//
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                FileOutputStream outFs = openFileOutput("file.txt", Context.MODE_PRIVATE);
+//                BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(outFs));
+//                for(int i=0;i<this.peopleList.getSize();i++){
+//                    Person person=this.peopleList.getPerson(i);
+//                   bufferedWriter.write(person.name);
+//                   bufferedWriter.newLine();
+//                }
+//                bufferedWriter.close();
+////
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
 
             super.onBackPressed();
