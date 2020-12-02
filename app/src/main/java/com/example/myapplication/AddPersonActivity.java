@@ -50,27 +50,7 @@ public class AddPersonActivity extends AppCompatActivity {
 
         btnCancle = findViewById(R.id.btnCancle);
         btnSave = findViewById(R.id.btnSave);
-        try {
-            FileOutputStream outFs=openFileOutput("file.txt", Context.MODE_PRIVATE);
-//                for(int i=0;i<this.peopleList.getSize();i++){
-//                    Person person =this.peopleList.getPerson(i);
 //
-//                    outFs.write(person.name.getBytes());
-//                    outFs.write(person.phoneNumber.getBytes());
-//                    outFs.write(person.group.getBytes());
-//                    outFs.write(person.birth.getBytes());
-//
-//
-//
-//                }
-            String str ="저장되었습니다.";
-            byte[] by=str.getBytes();
-            outFs.write(by);
-            outFs.close();} catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         //spinner group setting 및 클릭시 이벤트
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, relation);
