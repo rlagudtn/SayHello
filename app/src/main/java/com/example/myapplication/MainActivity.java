@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(MainActivity.this,AddPersonActivity.class);
 
                 startActivity(intent);
+                finish();
             }
         });
 

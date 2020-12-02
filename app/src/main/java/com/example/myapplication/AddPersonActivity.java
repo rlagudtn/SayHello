@@ -50,27 +50,27 @@ public class AddPersonActivity extends AppCompatActivity {
 
         btnCancle = findViewById(R.id.btnCancle);
         btnSave = findViewById(R.id.btnSave);
-//        try {
-//            FileOutputStream outFs=openFileOutput("file.txt", Context.MODE_PRIVATE);
-////                for(int i=0;i<this.peopleList.getSize();i++){
-////                    Person person =this.peopleList.getPerson(i);
-////
-////                    outFs.write(person.name.getBytes());
-////                    outFs.write(person.phoneNumber.getBytes());
-////                    outFs.write(person.group.getBytes());
-////                    outFs.write(person.birth.getBytes());
-////
-////
-////
-////                }
-//            String str ="오늘 날씨는 굿";
-//            byte[] by=str.getBytes();
-//            outFs.write(by);
-//            outFs.close();} catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            FileOutputStream outFs=openFileOutput("file.txt", Context.MODE_PRIVATE);
+//                for(int i=0;i<this.peopleList.getSize();i++){
+//                    Person person =this.peopleList.getPerson(i);
+//
+//                    outFs.write(person.name.getBytes());
+//                    outFs.write(person.phoneNumber.getBytes());
+//                    outFs.write(person.group.getBytes());
+//                    outFs.write(person.birth.getBytes());
+//
+//
+//
+//                }
+            String str ="저장되었습니다.";
+            byte[] by=str.getBytes();
+            outFs.write(by);
+            outFs.close();} catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //spinner group setting 및 클릭시 이벤트
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, relation);
@@ -121,14 +121,17 @@ public class AddPersonActivity extends AppCompatActivity {
                 Intent intent=new Intent(AddPersonActivity.this,MainActivity.class);
                 intent.putExtra("개인",person);
                 startActivity(intent);
+                finish();
+
             }
         });
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(AddPersonActivity.this,MainActivity.class);
-
                 startActivity(intent);
+                finish();
+
             }
         });
     }
@@ -138,6 +141,7 @@ public class AddPersonActivity extends AppCompatActivity {
         Intent intent=new Intent(AddPersonActivity.this,MainActivity.class);
 
         startActivity(intent);
+        finish();
         super.onBackPressed();
     }
 }
