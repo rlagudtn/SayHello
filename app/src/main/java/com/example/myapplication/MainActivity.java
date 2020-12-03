@@ -137,23 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (gapTime >= 0 && gapTime <= 2000) {
 
-//            try {
-//                FileOutputStream outFs = openFileOutput("file.txt", Context.MODE_PRIVATE);
-//                BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(outFs));
-//                for(int i=0;i<this.peopleList.getSize();i++){
-//                    Person person=this.peopleList.getPerson(i);
-//                   bufferedWriter.write(person.name);
-//                   bufferedWriter.newLine();
-//                }
-//                bufferedWriter.close();
-////
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-
             super.onBackPressed();
 
         } else {
