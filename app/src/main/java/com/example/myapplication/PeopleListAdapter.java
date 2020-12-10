@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 
 public class PeopleListAdapter extends BaseAdapter {
 
+
     public PeopleList peopleList;
     Context context;
 

@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedInputStream;
@@ -70,15 +71,9 @@ public class MainActivity extends AppCompatActivity {
         imgbtn_add = findViewById(R.id.imgbtn_add);
         imgbtn_more = findViewById(R.id.imgbtn_more);
 
-        Intent intent = getIntent();
-
-        //peopleList.addPerson(new Person("홍길동1", "010"));
-        Person person = (Person) intent.getSerializableExtra("person");
         //Toast.makeText(this, person.name.toString(),Toast.LENGTH_SHORT).show();
         //추가되는 개인을 저장한다.
-        if (person != null) {
-            this.peopleList.addPerson(person);
-            try {
+           try {
                 FileOutputStream outFs = openFileOutput("file.txt", Context.MODE_PRIVATE);
                 BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(outFs));
                 for(int i=0;i<this.peopleList.getSize();i++){
@@ -94,12 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 //
-        }
 
-//        for(int i=0;i<peopleList.getSize();i++){
-//            Toast.makeText(this, this.peopleList.getPerson(i).name.toString(),Toast.LENGTH_SHORT).show();
-//
-//        }
+
 
         btnGroup=findViewById(R.id.btnGroup);
         btnGroup.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GroupActivity.class);
 
-                startActivity(intent);
+                startActivityForResult(intent,0);
                 finish();
             }
         });
@@ -126,6 +117,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Intent intent = getIntent();
+
+            Person person = (Person) intent.getSerializableExtra("person");
+            if (person != null) {
+                this.peopleList.addPerson(person);
+            }
+        }
 
     }
 
